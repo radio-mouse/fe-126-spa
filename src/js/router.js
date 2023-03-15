@@ -4,10 +4,22 @@ import categories from './categories';
 import cart from './cart';
 
 const routes = {
-  '/': home,
-  '/products': products,
-  '/categories': categories,
-  '/cart': cart,
+  '/': {
+    title: 'Welcome To Our SPA Shop',
+    content: home,
+  },
+  '/products': {
+    title: 'Check Out Our Products',
+    content: products,
+  },
+  '/categories': {
+    title: 'All Categories Are Here',
+    content: categories,
+  },
+  '/cart': {
+    title: 'Your products',
+    content: cart,
+  },
 };
 
 const changeRoute = (route) => {
@@ -33,6 +45,8 @@ const handleRoute = () => {
     window.location.href = '/';
   }
 
+  const { title, content } = route;
+
   document.querySelectorAll('#nav-list .nav-link').forEach((el) => {
     el.classList.remove('active');
 
@@ -40,8 +54,9 @@ const handleRoute = () => {
       el.classList.add('active');
     }
   });
+  document.querySelector('h1').innerHTML = title;
+  document.querySelector('#content').innerHTML = content();
   document.querySelectorAll('a').forEach((el) => el.addEventListener('click', handleClick));
-  document.querySelector('#content').innerHTML = route();
 };
 
 const routerInit = () => {

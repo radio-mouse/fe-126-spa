@@ -1,3 +1,3 @@
-const cart = () => '<h1>this is cart page</h1>';
+const cart = () => 'cart will be here';
 
 export default cart;
