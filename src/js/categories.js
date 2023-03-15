@@ -1,7 +1,7 @@
-const createCategory = ({ name, slug }) => `
+const createCategory = ({ name, slug }, index) => `
   <div class="card my-4">
     <div class="card-header">
-      Featured
+      Category №${index + 1}
     </div>
     <div class="card-body">
       <h5 class="card-title">${name}</h5>
