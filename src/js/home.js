@@ -1,4 +1,4 @@
-const home = () => `
+const home = async () => `
   <div class="row py-2">
     <div class="col">
       <h2 class="display-5">Checkout out the information below</h2>

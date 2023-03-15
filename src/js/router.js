@@ -4,6 +4,7 @@ import products from './products';
 import about from './about';
 import cart from './cart';
 import content404 from './404';
+import loader from '../assets/loader.svg';
 
 const routes = {
   '/': {
@@ -39,17 +40,23 @@ const handleClick = (e) => {
 
   if (route !== window.location.pathname) {
     window.history.pushState({}, '', route);
-    window.dispatchEvent(new Event('changeRoute'));
+    window.dispatchEvent(new Event('popstate'));
   }
 };
 
 const handleRoute = () => {
   const location = window.location.pathname;
   const route = routes[location] ?? routes[404];
+  const { title, content } = route;
 
-  document.querySelector('h1').innerText = route.title;
-  document.querySelector('#content').innerHTML = route.content();
-  document.querySelectorAll('a').forEach((el) => el.addEventListener('click', handleClick));
+  document.querySelector('#content').innerHTML = `<img class="centered" src="${loader}" />`;
+
+  content().then((html) => {
+    document.querySelector('#content').innerHTML = html;
+    document.querySelectorAll('a').forEach((el) => el.addEventListener('click', handleClick));
+  });
+
+  document.querySelector('h1').innerText = title;
   document.querySelectorAll('#nav-list .nav-link').forEach((el) => {
     el.classList.remove('active');
 
@@ -61,7 +68,7 @@ const handleRoute = () => {
 
 const initRouter = () => {
   handleRoute();
-  window.addEventListener('changeRoute', handleRoute);
+  window.addEventListener('popstate', handleRoute);
 };
 
 export default initRouter;

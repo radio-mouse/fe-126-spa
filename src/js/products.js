@@ -1,3 +1,3 @@
-const products = () => 'here will be products page content';
+const products = async () => 'here will be products page content';
 
 export default products;

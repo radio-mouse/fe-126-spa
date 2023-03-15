@@ -1,3 +1,3 @@
-const cart = () => 'here will be about cart content';
+const cart = async () => 'here will be about cart content';
 
 export default cart;
