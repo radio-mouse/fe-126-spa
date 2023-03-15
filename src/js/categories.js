@@ -1,3 +1,3 @@
-const categories = () => 'categories will be here';
+const categories = () => 'here will be categories page content';
 
 export default categories;

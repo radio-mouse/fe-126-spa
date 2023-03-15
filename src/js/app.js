@@ -1,5 +1,5 @@
-import routerInit from './router';
+import initRouter from './router';
 
 document.addEventListener('DOMContentLoaded', () => {
-  routerInit();
+  initRouter();
 });

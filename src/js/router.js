@@ -1,12 +1,13 @@
+import categories from './categories';
 import home from './home';
 import products from './products';
-import categories from './categories';
-import cart from './cart';
 import about from './about';
+import cart from './cart';
+import content404 from './404';
 
 const routes = {
   '/': {
-    title: 'Welcome To Our SPA Shop',
+    title: 'Welcome to Our SPA Store',
     content: home,
   },
   '/products': {
@@ -18,18 +19,17 @@ const routes = {
     content: categories,
   },
   '/about': {
-    title: "Here's information about our store",
+    title: "Here's Information About Our Store",
     content: about,
   },
   '/cart': {
-    title: 'Your products',
+    title: 'Your Products',
     content: cart,
   },
-};
-
-const changeRoute = (route) => {
-  window.history.pushState({}, '', route);
-  window.dispatchEvent(new Event('popstate'));
+  404: {
+    title: 'The Page Is Not Found',
+    content: content404,
+  },
 };
 
 const handleClick = (e) => {
@@ -37,21 +37,19 @@ const handleClick = (e) => {
 
   const route = e.target.pathname;
 
-  if (window.location.pathname !== route) {
-    changeRoute(route);
+  if (route !== window.location.pathname) {
+    window.history.pushState({}, '', route);
+    window.dispatchEvent(new Event('changeRoute'));
   }
 };
 
 const handleRoute = () => {
   const location = window.location.pathname;
-  const route = routes[location];
+  const route = routes[location] ?? routes[404];
 
-  if (!route) {
-    window.location.href = '/';
-  }
-
-  const { title, content } = route;
-
+  document.querySelector('h1').innerText = route.title;
+  document.querySelector('#content').innerHTML = route.content();
+  document.querySelectorAll('a').forEach((el) => el.addEventListener('click', handleClick));
   document.querySelectorAll('#nav-list .nav-link').forEach((el) => {
     el.classList.remove('active');
 
@@ -59,14 +57,11 @@ const handleRoute = () => {
       el.classList.add('active');
     }
   });
-  document.querySelector('h1').innerHTML = title;
-  document.querySelector('#content').innerHTML = content();
-  document.querySelectorAll('a').forEach((el) => el.addEventListener('click', handleClick));
 };
 
-const routerInit = () => {
+const initRouter = () => {
   handleRoute();
-  window.addEventListener('popstate', () => handleRoute());
+  window.addEventListener('changeRoute', handleRoute);
 };
 
-export default routerInit;
+export default initRouter;

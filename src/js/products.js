@@ -1,3 +1,3 @@
-const products = () => 'products will be here';
+const products = () => 'here will be products page content';
 
 export default products;

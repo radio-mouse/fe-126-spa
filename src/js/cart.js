@@ -1,3 +1,3 @@
-const cart = () => 'cart will be here';
+const cart = () => 'here will be about cart content';
 
 export default cart;
