@@ -2,6 +2,7 @@ import home from './home';
 import products from './products';
 import categories from './categories';
 import cart from './cart';
+import about from './about';
 
 const routes = {
   '/': {
@@ -15,6 +16,10 @@ const routes = {
   '/categories': {
     title: 'All Categories Are Here',
     content: categories,
+  },
+  '/about': {
+    title: "Here's information about our store",
+    content: about,
   },
   '/cart': {
     title: 'Your products',
