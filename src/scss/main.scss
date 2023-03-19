@@ -3,3 +3,33 @@
 .centered {
   margin: 0 auto;
 }
+
+.products-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  padding: 0;
+  margin: 0;
+
+  li {
+    width: 200px;
+    flex-grow: 1;
+  }
+}
+
+.categories-list {
+  padding: 0;
+  margin: 0;
+}
+
+.card-content {
+  min-height: 140px;
+}
+
+h5 {
+  pointer-events: none;
+}
+
+.load-more {
+  display: block !important;
+}

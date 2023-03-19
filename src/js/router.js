@@ -4,7 +4,8 @@ import products from './products';
 import about from './about';
 import cart from './cart';
 import content404 from './404';
-import loader from '../assets/loader.svg';
+
+import { loaderHtml } from './constants';
 
 const routes = {
   '/': {
@@ -49,10 +50,11 @@ const handleRoute = () => {
   const route = routes[location] ?? routes[404];
   const { title, content } = route;
 
-  document.querySelector('#content').innerHTML = `<img class="centered" src="${loader}" />`;
+  document.querySelector('#content').innerHTML = loaderHtml;
 
   content().then((html) => {
-    document.querySelector('#content').innerHTML = html;
+    document.querySelector('#content').innerHTML = '';
+    document.querySelector('#content').append(html);
     document.querySelectorAll('a').forEach((el) => el.addEventListener('click', handleClick));
   });
 
