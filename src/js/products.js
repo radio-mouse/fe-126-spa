@@ -5,11 +5,20 @@ const ul = document.createElement('ul');
 ul.classList.add('products-list');
 wrap.append(ul);
 
+// eslint-disable-next-line no-unused-vars
+export const createCartButton = (slug) => {
+  const button = document.createElement('button');
+  button.classList.add('btn', 'btn-primary');
+  button.innerText = 'Add to card';
+
+  return button;
+};
+
 const createCard = ({
   title, createdBy, price, slug,
 }) => {
-  const wrap = document.createElement('li');
-  wrap.classList.add('card');
+  const li = document.createElement('li');
+  li.classList.add('card');
 
   const body = document.createElement('div');
   body.classList.add('card-body');
@@ -26,15 +35,11 @@ const createCard = ({
     </div>
   `;
 
-  const button = document.createElement('button');
-  button.classList.add('btn', 'btn-primary');
-  button.innerText = 'Add to card';
-
   body.insertAdjacentHTML('afterbegin', html);
-  body.append(button);
-  wrap.append(body);
+  body.append(createCartButton(slug));
+  li.append(body);
 
-  return wrap;
+  return li;
 };
 
 const update = async (page) => {
@@ -48,6 +53,7 @@ const update = async (page) => {
   json.data.map((el) => ul.append(createCard(el)));
 
   if (nextPage) {
+    // eslint-disable-next-line no-use-before-define
     wrap.append(createLoadButton(json.metadata.nextPage));
   }
 };

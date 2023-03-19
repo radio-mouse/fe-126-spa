@@ -6,6 +6,7 @@ import cart from './cart';
 import content404 from './404';
 
 import { loaderHtml } from './constants';
+import productDetail from './productDetail';
 
 const routes = {
   '/': {
@@ -45,9 +46,19 @@ const handleClick = (e) => {
   }
 };
 
+// eslint-disable-next-line consistent-return
+const getProductDetailRoute = (location) => {
+  if (location.includes('products') && location.match(/\//g).length > 1) {
+    return {
+      content: productDetail,
+      title: '',
+    };
+  }
+};
+
 const handleRoute = () => {
   const location = window.location.pathname;
-  const route = routes[location] ?? routes[404];
+  const route = routes[location] ?? getProductDetailRoute(location) ?? routes[404];
   const { title, content } = route;
 
   document.querySelector('#content').innerHTML = loaderHtml;
