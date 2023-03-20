@@ -18,7 +18,7 @@ const categories = async () => {
     const data = await fetch('https://api.storerestapi.com/categories');
     const json = await data.json();
 
-    json.data.map((el, index) => ul.insertAdjacentHTML('afterbegin', createCategory(el, index)));
+    json.data.map((el, index) => ul.insertAdjacentHTML('beforeend', createCategory(el, index)));
   }
 
   return ul;

@@ -23,7 +23,7 @@
 }
 
 .card-content {
-  min-height: 140px;
+  padding-bottom: 12px;
 }
 
 h5 {
@@ -32,4 +32,14 @@ h5 {
 
 .load-more {
   display: block !important;
+}
+
+.card-title {
+  text-transform: capitalize;
+  display: block;
+  min-height: 100px;
+}
+
+h1 {
+  text-transform: capitalize;
 }

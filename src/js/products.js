@@ -14,9 +14,11 @@ export const createCartButton = (slug) => {
   return button;
 };
 
-const createCard = ({
+export const createCard = ({
   title, createdBy, price, slug,
 }) => {
+  const { name } = createdBy;
+
   const li = document.createElement('li');
   li.classList.add('card');
 
@@ -28,10 +30,8 @@ const createCard = ({
       <a class="card-title" href="/products/${slug}">
         <h5 class="card-title">${title}</h5>
       </a>
-      <p class="card-text">
-        By ${createdBy.name}
-        <b>${price}</b>
-      </p>
+      ${name ? `<p class="card-text">By ${createdBy.name}</p>` : ''}
+      <span class="display-6">$${price}</span>
     </div>
   `;
 

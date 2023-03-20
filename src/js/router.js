@@ -4,9 +4,10 @@ import products from './products';
 import about from './about';
 import cart from './cart';
 import content404 from './404';
+import productDetail from './productDetail';
+import categoryDetail from './categoryDetail';
 
 import { loaderHtml } from './constants';
-import productDetail from './productDetail';
 
 const routes = {
   '/': {
@@ -56,9 +57,23 @@ const getProductDetailRoute = (location) => {
   }
 };
 
+// eslint-disable-next-line consistent-return
+const getCategoryDetailRoute = (location) => {
+  if (location.includes('categories') && location.match(/\//g).length > 1) {
+    return {
+      content: categoryDetail,
+      title: '',
+    };
+  }
+};
+
 const handleRoute = () => {
   const location = window.location.pathname;
-  const route = routes[location] ?? getProductDetailRoute(location) ?? routes[404];
+  const route = routes[location]
+    ?? getProductDetailRoute(location)
+    ?? getCategoryDetailRoute(location)
+    ?? routes[404];
+
   const { title, content } = route;
 
   document.querySelector('#content').innerHTML = loaderHtml;
@@ -73,7 +88,7 @@ const handleRoute = () => {
   document.querySelectorAll('#nav-list .nav-link').forEach((el) => {
     el.classList.remove('active');
 
-    if (el.pathname === location) {
+    if (el.pathname === location || (location.includes(el.pathname) && el.pathname !== '/')) {
       el.classList.add('active');
     }
   });
