@@ -1,18 +1,10 @@
 import { loaderHtml } from './constants';
+import { createCartButton } from './cart';
 
 const wrap = document.createElement('div');
 const ul = document.createElement('ul');
 ul.classList.add('products-list');
 wrap.append(ul);
-
-// eslint-disable-next-line no-unused-vars
-export const createCartButton = (slug) => {
-  const button = document.createElement('button');
-  button.classList.add('btn', 'btn-primary');
-  button.innerText = 'Add to card';
-
-  return button;
-};
 
 export const createCard = ({
   title, createdBy, price, slug,

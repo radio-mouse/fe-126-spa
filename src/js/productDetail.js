@@ -1,4 +1,4 @@
-import { createCartButton } from './products';
+import { createCartButton } from './cart';
 
 const productDetail = async () => {
   const data = await fetch(`https://api.storerestapi.com/products/${window.location.pathname.split('/')[2]}`);
